@@ -1,22 +1,31 @@
-// Dark Mode Toggle
-const darkModeToggle = document.querySelector('.dark-mode-toggle');
-const body = document.body;
+document.addEventListener("DOMContentLoaded", () => {
+    const darkModeToggle = document.querySelector('.dark-mode-toggle');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    const body = document.body;
 
-darkModeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    if (body.classList.contains('dark-mode')) {
-        darkModeToggle.textContent = '☀️';
-    } else {
-        darkModeToggle.textContent = '🌙';
-    }
-});
+    // Dark mode toggle
+    darkModeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        darkModeToggle.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    });
 
-// Sticky Header Effect
-window.addEventListener('scroll', function () {
-    const header = document.querySelector('.sticky-header');
-    if (window.scrollY > 50) {
-        header.style.backgroundColor = "#128C7E";
-    } else {
-        header.style.backgroundColor = "#25D366";
-    }
+    // Sticky header background change on scroll
+    window.addEventListener('scroll', function () {
+        const header = document.querySelector('.sticky-header');
+        header.style.backgroundColor = window.scrollY > 50 ? "#128C7E" : "#25D366";
+    });
+
+    // Menu toggle functionality
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (event) => {
+        if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+            navMenu.classList.remove('active');
+        }
+    });
 });
+ 
